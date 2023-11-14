@@ -2,7 +2,64 @@
 
 A Simple PoC (Proof of Concept) of Hate-speech (Toxic content) Detector API Server using model from [detoxify](https://github.com/unitaryai/detoxify). Detoxify (unbiased model) achieves score of 93.74% compared to top leaderboard score with 94.73% in [Jigsaw Unintended Bias in Toxicity Classification](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification).
 
-# License
+## Requirements
+
+Python 3.9 or Python 3.10 is required to run the app. There is [bug/issue](https://github.com/unitaryai/detoxify/issues/94) for Python 3.11 or higher version affecting detoxify library.
+
+## Getting Started
+
+You can start by cloning this repository to run or modify it locally
+
+```
+git clone https://github.com/atrifat/hate-speech-detector-api
+cd hate-speech-detector-api
+```
+
+Create virtual environment using venv, pyenv, or conda. This is an example using venv to create and activate the environment:
+
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+install its dependencies
+
+```
+pip install -U -r requirements.txt
+```
+
+and run it using command
+
+```
+python3 app.py
+```
+
+You can also copy `.env.example` to `.env` file and change the environment value based on your needs before running the app.
+
+If you want to test the API server, you can use GUI tools like [Postman](https://www.postman.com/) or using curl.
+
+```
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"api_key":"your_own_api_key_if_you_set_them", "q":"hello world good morning"}' \
+  http://localhost:7860/predict
+```
+
+The result of classification will be shown as follow (Example: using unbiased-small model):
+
+```
+{
+    "identity_attack":0.0,
+    "insult":0.0,
+    "obscene":0.0,
+    "severe_toxicity":0.0,
+    "sexual_explicit":0.0,
+    "threat":0.0,
+    "toxicity":0.0010000000474974513
+}
+```
+
+## License
 
 MIT License
 
@@ -26,6 +83,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-# Author
+## Author
 
 Rif'at Ahdi Ramadhani (atrifat)
