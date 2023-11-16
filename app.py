@@ -100,7 +100,7 @@ def predict():
 @app.route("/", methods=["GET"])
 def index():
     response = {
-        "message": "Use /predict and /predict_sentiment route to get prediction result"
+        "message": "Use /predict route to get prediction result"
     }
     return jsonify(response)
 
