@@ -36,6 +36,20 @@ python3 app.py
 
 You can also copy `.env.example` to `.env` file and change the environment value based on your needs before running the app.
 
+There is also Dockerfile available if you want to build docker image locally. If you don't want to build docker image locally, you can use the published version in [ghcr.io/atrifat/hate-speech-detector-api](https://github.com/atrifat/hate-speech-detector-api/pkgs/container/hate-speech-detector-api).
+
+Run it:
+
+```
+docker run --init --env-file .env -p 7860:7860 -it ghcr.io/atrifat/hate-speech-detector-api
+```
+
+or run it in the background (daemon):
+
+```
+docker run --init --env-file .env -p 7860:7860 -it --name hate-speech-detector-api -d ghcr.io/atrifat/hate-speech-detector-api
+```
+
 If you want to test the API server, you can use GUI tools like [Postman](https://www.postman.com/) or using curl.
 
 ```
