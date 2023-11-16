@@ -15,7 +15,7 @@ APP_ENV = os.getenv("APP_ENV", "production")
 LISTEN_HOST = os.getenv("LISTEN_HOST", "0.0.0.0")
 LISTEN_PORT = os.getenv("LISTEN_PORT", "7860")
 DETOXIFY_MODEL = os.getenv("DETOXIFY_MODEL", "unbiased-small")
-APP_VERSION = "0.0.0"
+APP_VERSION = "0.1.0"
 
 # Setup logging configuration
 LOGGING_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
