@@ -2,6 +2,10 @@
 
 A Simple PoC (Proof of Concept) of Hate-speech (Toxic content) Detector API Server using model from [detoxify](https://github.com/unitaryai/detoxify). Detoxify (unbiased model) achieves score of 93.74% compared to top leaderboard score with 94.73% in [Jigsaw Unintended Bias in Toxicity Classification](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification).
 
+## Demo
+
+A demo instance is available on [HuggingFace Spaces - https://atrifat-hate-speech-detector-api-demo.hf.space](https://atrifat-hate-speech-detector-api-demo.hf.space). There is no guarantee for the uptime, but feel free to test.
+
 ## Requirements
 
 Python 3.9 or Python 3.10 is required to run the app. There is [bug/issue](https://github.com/unitaryai/detoxify/issues/94) for Python 3.11 or higher version affecting detoxify library.
