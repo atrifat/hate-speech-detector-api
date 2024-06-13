@@ -6,6 +6,7 @@ import functools
 import datetime
 from detoxify import Detoxify
 import logging
+from flask_caching import Cache
 
 load_dotenv()
 
@@ -15,6 +16,9 @@ APP_ENV = os.getenv("APP_ENV", "production")
 LISTEN_HOST = os.getenv("LISTEN_HOST", "0.0.0.0")
 LISTEN_PORT = os.getenv("LISTEN_PORT", "7860")
 DETOXIFY_MODEL = os.getenv("DETOXIFY_MODEL", "unbiased-small")
+CACHE_DURATION_SECONDS = int(os.getenv("CACHE_DURATION_SECONDS", 60))
+ENABLE_CACHE = os.getenv("ENABLE_CACHE", "false") == "true"
+
 APP_VERSION = "0.1.0"
 
 # Setup logging configuration
@@ -39,6 +43,14 @@ if ENABLE_API_TOKEN and API_TOKEN == "":
 model = Detoxify(DETOXIFY_MODEL)
 
 app = Flask(__name__)
+
+cache_config = {
+    "DEBUG": True if APP_ENV != "production" else False,
+    "CACHE_TYPE": "SimpleCache" if ENABLE_CACHE else "NullCache",
+    "CACHE_DEFAULT_TIMEOUT": CACHE_DURATION_SECONDS,  # Cache duration in seconds
+}
+cache = Cache(config=cache_config)
+cache.init_app(app)
 
 
 def is_valid_api_key(api_key):
@@ -67,6 +79,16 @@ def api_required(func):
     return decorator
 
 
+def make_key_fn():
+    """A function which is called to derive the key for a computed value.
+       The key in this case is the concat value of all the json request
+       parameters. Other strategy could to use any hashing function.
+    :returns: unique string for which the value should be cached.
+    """
+    user_data = request.get_json()
+    return ",".join([f"{key}={value}" for key, value in user_data.items()])
+
+
 def perform_hate_speech_analysis(query):
     result = {}
     df = pd.DataFrame(model.predict(query), index=[0])
@@ -86,6 +108,7 @@ def handle_exception(error):
 
 @app.route("/predict", methods=["POST"])
 @api_required
+@cache.cached(make_cache_key=make_key_fn)
 def predict():
     data = request.json
     q = data["q"]
@@ -99,9 +122,7 @@ def predict():
 
 @app.route("/", methods=["GET"])
 def index():
-    response = {
-        "message": "Use /predict route to get prediction result"
-    }
+    response = {"message": "Use /predict route to get prediction result"}
     return jsonify(response)
 
 
