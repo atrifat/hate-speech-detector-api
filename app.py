@@ -21,7 +21,7 @@ CACHE_DURATION_SECONDS = int(os.getenv("CACHE_DURATION_SECONDS", 60))
 ENABLE_CACHE = os.getenv("ENABLE_CACHE", "false") == "true"
 TORCH_DEVICE = os.getenv("TORCH_DEVICE", "auto")
 
-APP_VERSION = "0.1.0"
+APP_VERSION = "0.2.0"
 
 # Setup logging configuration
 LOGGING_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
