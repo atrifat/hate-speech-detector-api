@@ -4,6 +4,7 @@ import pandas as pd
 from flask import Flask, request, jsonify
 import functools
 import datetime
+import torch
 from detoxify import Detoxify
 import logging
 from flask_caching import Cache
@@ -18,6 +19,7 @@ LISTEN_PORT = os.getenv("LISTEN_PORT", "7860")
 DETOXIFY_MODEL = os.getenv("DETOXIFY_MODEL", "unbiased-small")
 CACHE_DURATION_SECONDS = int(os.getenv("CACHE_DURATION_SECONDS", 60))
 ENABLE_CACHE = os.getenv("ENABLE_CACHE", "false") == "true"
+TORCH_DEVICE = os.getenv("TORCH_DEVICE", "auto")
 
 APP_VERSION = "0.1.0"
 
@@ -40,7 +42,12 @@ else:
 if ENABLE_API_TOKEN and API_TOKEN == "":
     raise Exception("API_TOKEN is required if ENABLE_API_TOKEN is enabled")
 
-model = Detoxify(DETOXIFY_MODEL)
+if TORCH_DEVICE == "auto":
+    torch_device = "cuda" if torch.cuda.is_available() else "cpu"
+else:
+    torch_device = TORCH_DEVICE
+
+model = Detoxify(DETOXIFY_MODEL, device=torch_device)
 
 app = Flask(__name__)
 
