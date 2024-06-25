@@ -1,10 +1,12 @@
 # hate-speech-detector-api
 
-A Simple PoC (Proof of Concept) of Hate-speech (Toxic content) Detector API Server using model from [detoxify](https://github.com/unitaryai/detoxify). Detoxify (unbiased model) achieves score of 93.74% compared to top leaderboard score with 94.73% in [Jigsaw Unintended Bias in Toxicity Classification](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification).
+A Simple PoC (Proof of Concept) of Hate-speech (Toxic content) Detector API Server using model from [detoxify](https://github.com/unitaryai/detoxify) and/or [custom traditional machine learning](experiments/model_voting_partial_best.pkl) model. Detoxify (unbiased model) achieves AUC score of 93.74% compared to top leaderboard score with AUC 94.73% in [Jigsaw Unintended Bias in Toxicity Classification](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification). To those who are interested in training custom machine learning model based on [Jigsaw Unintended Bias in Toxicity Classification](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification) can take a look at our [Jupyter Notebook](experiments/hate-speech-classification.ipynb).
+
+hate-speech-detector-api is a core dependency of [nostr-filter-relay](https://github.com/atrifat/nostr-filter-relay).
 
 ## Demo
 
-A demo instance is available on [HuggingFace Spaces - https://atrifat-hate-speech-detector-api-demo.hf.space](https://atrifat-hate-speech-detector-api-demo.hf.space). There is no guarantee for the uptime, but feel free to test.
+A demo gradio showcase is available on [HuggingFace Spaces - https://huggingface.co/spaces/rifatramadhani/hate-speech-detector](https://huggingface.co/spaces/rifatramadhani/hate-speech-detector). There is no guarantee for the uptime, but feel free to test.
 
 ## Requirements
 
