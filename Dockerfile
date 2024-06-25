@@ -26,7 +26,10 @@ ENV HOME=/home/user
 
 COPY --from=builder --chown=user:user /builder/venv /app/venv
 
-COPY --chown=user:user app.py app.py 
+COPY --chown=user:user app.py app.py
+
+RUN mkdir -p /app/experiments
+COPY --chown=user:user experiments/*.pkl experiments/ 
 
 RUN chown -R user:user /app && chown -R user:user /home/user
 
