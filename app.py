@@ -38,7 +38,7 @@ POTENTIAL_TOXIC_WORDS = list(
 )
 HYBRID_THRESOLD_CHECK = float(os.getenv("HYBRID_THRESOLD_CHECK", 0.5))
 TORCH_DEVICE = os.getenv("TORCH_DEVICE", "auto")
-APP_VERSION = "0.2.0"
+APP_VERSION = "0.3.0"
 
 # Setup logging configuration
 LOGGING_DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
