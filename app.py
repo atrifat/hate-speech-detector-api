@@ -140,7 +140,7 @@ def perform_hate_speech_analysis(query):
 
 
 def perform_hate_speech_analysis_custom(query):
-    query_vector = vectorizer.transform([query]) if vectorizer != None else ["query"]
+    query_vector = vectorizer.transform([query]) if vectorizer != None else [query]
 
     result = {
         "identity_attack": 0.0,
